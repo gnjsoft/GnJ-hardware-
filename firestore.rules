@@ -1,0 +1,125 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // 0. Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- Helpers ---
+    
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isEmailVerified() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Role Checks (Assuming roles are stored in the user document)
+    function getUserData(uid) {
+      return get(/databases/$(database)/documents/users/$(uid)).data;
+    }
+
+    function hasRole(uid, role) {
+      let data = getUserData(uid);
+      return data != null && data.role == role;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && hasRole(request.auth.uid, 'admin');
+    }
+
+    function isSales() {
+      return isSignedIn() && hasRole(request.auth.uid, 'sales');
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    // --- Validation Blueprints ---
+
+    function isValidProduct(data) {
+      return data.keys().hasAll(['name', 'brand', 'category', 'price', 'stock', 'sku']) &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 200 &&
+             data.brand is string && data.brand.size() > 0 &&
+             data.price is number && data.price >= 0 &&
+             data.stock is int && data.stock >= 0 &&
+             data.sku is string && data.sku.matches('^[A-Z0-9\\-]+$');
+    }
+
+    function isValidUser(data) {
+      return data.keys().hasAll(['uid', 'email', 'role']) &&
+             data.uid == request.auth.uid &&
+             data.email == request.auth.token.email &&
+             data.role in ['consumer', 'business', 'admin'] && // Self-assignable only to these
+             (!('creditLimit' in data) || data.creditLimit is number);
+    }
+
+    function isValidOrder(data) {
+      return data.keys().hasAll(['userId', 'total', 'status', 'createdAt']) &&
+             data.userId == request.auth.uid &&
+             data.total is number && data.total >= 0 &&
+             data.status == 'pending' &&
+             data.createdAt == request.time;
+    }
+
+    // --- Collection Routes ---
+
+    // Products: Read public, Write Admin/Sales
+    match /products/{productId} {
+      allow get: if isValidId(productId);
+      allow list: if true;
+      allow create: if (isAdmin() || isSales()) && isValidProduct(incoming());
+      allow update: if (isAdmin() || isSales()) && isValidProduct(incoming());
+      allow delete: if isAdmin();
+    }
+
+    // Users: Read/Write own profile
+    match /users/{userId} {
+      allow get: if isOwner(userId) || isAdmin();
+      allow list: if isAdmin();
+      
+      allow create: if isOwner(userId) && isValidUser(incoming()) && 
+                    incoming().role in ['consumer', 'business']; // Cannot register as admin
+      
+      allow update: if (isOwner(userId) && 
+                      incoming().diff(existing()).affectedKeys().hasOnly(['displayName', 'companyName', 'gstNumber']) &&
+                      isValidUser(incoming())) || isAdmin();
+    }
+
+    // Orders: User create/read own, Admin update
+    match /orders/{orderId} {
+      allow get: if isSignedIn() && (isOwner(existing().userId) || isAdmin());
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      
+      allow create: if isSignedIn() && isEmailVerified() && isValidOrder(incoming()) && 
+                    exists(/databases/$(database)/documents/users/$(request.auth.uid));
+      
+      allow update: if isAdmin() || (isSales() && incoming().diff(existing()).affectedKeys().hasOnly(['status']));
+    }
+
+    // RFQ: Business only
+    match /rfq/{rfqId} {
+      allow create: if isSignedIn() && hasRole(request.auth.uid, 'business') && 
+                    incoming().userId == request.auth.uid &&
+                    incoming().createdAt == request.time;
+      allow get: if isSignedIn() && (isOwner(existing().userId) || isAdmin());
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+    }
+  }
+}

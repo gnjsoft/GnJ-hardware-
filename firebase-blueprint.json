@@ -1,0 +1,103 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Hardware product details and inventory information.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "brand": { "type": "string" },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "stock": { "type": "integer" },
+        "sku": { "type": "string" },
+        "isFeatured": { "type": "boolean" },
+        "images": { "type": "array", "items": { "type": "string" } },
+        "specs": { "type": "array", "items": { "$ref": "#/entities/TechnicalSpec" } },
+        "bulkPricing": { "type": "array", "items": { "$ref": "#/entities/PricingTier" } }
+      },
+      "required": ["name", "brand", "category", "price", "stock", "sku"]
+    },
+    "TechnicalSpec": {
+      "title": "TechnicalSpec",
+      "description": "Label-value pair for hardware specifications.",
+      "type": "object",
+      "properties": {
+        "label": { "type": "string" },
+        "value": { "type": "string" }
+      }
+    },
+    "PricingTier": {
+      "title": "PricingTier",
+      "description": "Bulk pricing discount tiers.",
+      "type": "object",
+      "properties": {
+        "minQuantity": { "type": "integer" },
+        "price": { "type": "number" }
+      }
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User account information including B2B status.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["consumer", "business", "admin", "sales"] },
+        "companyName": { "type": "string" },
+        "gstNumber": { "type": "string" },
+        "creditLimit": { "type": "number" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer purchase transaction record.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "total": { "type": "number" },
+        "gstTotal": { "type": "number" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "shippingAddress": { "type": "string" }
+      }
+    },
+    "RFQ": {
+      "title": "RFQ",
+      "description": "Request for Quotation from B2B customers.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "companyName": { "type": "string" },
+        "products": { "type": "array", "items": { "type": "string" } },
+        "message": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Public catalog of hardware products."
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles and permissions."
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Customer orders."
+    },
+    "/rfq/{rfqId}": {
+      "schema": "RFQ",
+      "description": "Business quotation requests."
+    }
+  }
+}
