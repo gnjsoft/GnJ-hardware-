@@ -51,7 +51,7 @@ export default function Footer() {
                 <li><Link to="/category/workstations" className="hover:text-brand-secondary">Professional Workstations</Link></li>
                 <li><Link to="/category/servers" className="hover:text-brand-secondary">Enterprise Servers</Link></li>
                 <li><Link to="/category/networking" className="hover:text-brand-secondary">Network Infrastructure</Link></li>
-                <li><Link to="/corporate" className="hover:text-brand-secondary">Bulk Procurement</Link></li>
+                <li><Link to="/b2b-solutions" className="hover:text-brand-secondary">Bulk Procurement</Link></li>
               </ul>
             </div>
             <div>

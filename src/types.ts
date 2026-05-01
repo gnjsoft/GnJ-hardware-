@@ -10,7 +10,10 @@ export enum ProductCategory {
   NETWORKING = 'Networking',
   SECURITY = 'Firewalls & Security',
   SURVEILLANCE = 'CCTV & Surveillance',
-  PRINTING = 'Printers & Accessories'
+  ACCESS_CONTROL = 'Access Control',
+  PRINTING = 'Printers & Accessories',
+  CONSUMABLES = 'Consumables & Supplies',
+  ACCESSORIES = 'Peripherals & Accessories'
 }
 
 export enum UserRole {

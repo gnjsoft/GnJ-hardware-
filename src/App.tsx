@@ -15,6 +15,12 @@ import Networking from './pages/Networking';
 import Storage from './pages/Storage';
 import Laptops from './pages/Laptops';
 import Firewalls from './pages/Firewalls';
+import CCTV from './pages/CCTV';
+import AccessControl from './pages/AccessControl';
+import Printers from './pages/Printers';
+import Consumables from './pages/Consumables';
+import Accessories from './pages/Accessories';
+import B2Bsolutions from './pages/B2Bsolutions';
 import Account from './pages/Account';
 import FirebaseStatusBanner from './components/FirebaseStatusBanner';
 
@@ -47,13 +53,18 @@ export default function App() {
               <Route path="/storage" element={<Storage />} />
               <Route path="/laptops" element={<Laptops />} />
               <Route path="/firewalls" element={<Firewalls />} />
+              <Route path="/cctv" element={<CCTV />} />
+              <Route path="/access-control" element={<AccessControl />} />
+              <Route path="/printers" element={<Printers />} />
+              <Route path="/consumables" element={<Consumables />} />
+              <Route path="/accessories" element={<Accessories />} />
               <Route path="/catalog" element={<Catalog />} />
               <Route path="/category/:id" element={<Catalog />} />
               <Route path="/product/:id" element={<Placeholder name="Product" />} />
               <Route path="/cart" element={<Placeholder name="Shopping Cart" />} />
               <Route path="/checkout" element={<Placeholder name="Checkout" />} />
               <Route path="/account" element={<Account />} />
-              <Route path="/corporate" element={<Placeholder name="Corporate Portal" />} />
+              <Route path="/b2b-solutions" element={<B2Bsolutions />} />
               <Route path="/support" element={<Placeholder name="Support" />} />
               <Route path="*" element={<Placeholder name="404 Not Found" />} />
             </Routes>

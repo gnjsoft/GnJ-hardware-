@@ -58,7 +58,7 @@ export default function Header() {
                 {cat.sub.map((item) => (
                   <Link
                     key={item}
-                    to={item === 'Desktops' ? '/desktops' : item === 'Workstations' ? '/workstations' : item === 'Servers' ? '/servers' : item === 'Networking' ? '/networking' : item === 'Storage' ? '/storage' : item === 'Laptops' ? '/laptops' : item === 'Firewalls' ? '/firewalls' : `/category/${item.toLowerCase()}`}
+                    to={item === 'Desktops' ? '/desktops' : item === 'Workstations' ? '/workstations' : item === 'Servers' ? '/servers' : item === 'Networking' ? '/networking' : item === 'Storage' ? '/storage' : item === 'Laptops' ? '/laptops' : item === 'Firewalls' ? '/firewalls' : item === 'CCTV' ? '/cctv' : item === 'Access Control' ? '/access-control' : item === 'Printers' ? '/printers' : item === 'Consumables' ? '/consumables' : item === 'Accessories' ? '/accessories' : `/category/${item.toLowerCase()}`}
                     className="block rounded-md px-3 py-2 text-sm transition-colors hover:bg-slate-50 hover:text-brand-secondary"
                   >
                     {item}
@@ -67,7 +67,7 @@ export default function Header() {
               </div>
             </div>
           ))}
-          <Link to="/corporate" className="text-sm font-medium text-brand-secondary hover:underline underline-offset-4">
+          <Link to="/b2b-solutions" className="text-sm font-medium text-brand-secondary hover:underline underline-offset-4">
             B2B Solutions
           </Link>
         </nav>
@@ -119,7 +119,7 @@ export default function Header() {
                   {cat.sub.map((item) => (
                     <Link
                       key={item}
-                      to={item === 'Desktops' ? '/desktops' : item === 'Workstations' ? '/workstations' : item === 'Servers' ? '/servers' : item === 'Networking' ? '/networking' : item === 'Storage' ? '/storage' : item === 'Laptops' ? '/laptops' : item === 'Firewalls' ? '/firewalls' : `/category/${item.toLowerCase()}`}
+                      to={item === 'Desktops' ? '/desktops' : item === 'Workstations' ? '/workstations' : item === 'Servers' ? '/servers' : item === 'Networking' ? '/networking' : item === 'Storage' ? '/storage' : item === 'Laptops' ? '/laptops' : item === 'Firewalls' ? '/firewalls' : item === 'CCTV' ? '/cctv' : item === 'Access Control' ? '/access-control' : item === 'Printers' ? '/printers' : item === 'Consumables' ? '/consumables' : item === 'Accessories' ? '/accessories' : `/category/${item.toLowerCase()}`}
                       className="text-sm text-slate-600 hover:text-brand-secondary"
                     >
                       {item}
@@ -128,7 +128,7 @@ export default function Header() {
                 </div>
               </div>
             ))}
-            <Link to="/corporate" className="mt-4 rounded-lg bg-brand-secondary px-4 py-3 text-center font-bold text-white">
+            <Link to="/b2b-solutions" className="mt-4 rounded-lg bg-brand-secondary px-4 py-3 text-center font-bold text-white">
               Enterprise Portal
             </Link>
           </nav>

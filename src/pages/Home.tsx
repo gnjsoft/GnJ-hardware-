@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Cpu, Server, ShieldCheck, Laptop, Monitor, Zap, Database } from 'lucide-react';
+import { ArrowRight, Cpu, Server, ShieldCheck, Laptop, Monitor, Zap, Database, Camera, Lock, Printer, Package, MousePointer2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { formatINR } from '../lib/utils';
 
@@ -67,7 +67,7 @@ export default function Home() {
                 Explore Marketplace <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link 
-                to="/corporate" 
+                to="/b2b-solutions" 
                 className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-8 py-4 font-bold text-white backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/20"
               >
                 Corporate Login
@@ -141,7 +141,7 @@ export default function Home() {
             <Link to="/catalog" className="text-sm font-bold text-brand-secondary hover:underline">View All Categories</Link>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {[
               { title: 'Desktops', icon: Monitor, count: '64 Models', img: 'https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&q=80&w=600', link: '/desktops' },
               { title: 'Workstations', icon: Cpu, count: '42 Models', img: 'https://images.unsplash.com/photo-1547082299-de196ea013d6?auto=format&fit=crop&q=80&w=600', link: '/workstations' },
@@ -150,6 +150,11 @@ export default function Home() {
               { title: 'Storage', icon: Database, count: '15 Models', img: 'https://images.unsplash.com/photo-1597733336794-12d05021d510?auto=format&fit=crop&q=80&w=600', link: '/storage' },
               { title: 'Networking', icon: Zap, count: '89 Models', img: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=600', link: '/networking' },
               { title: 'Firewalls', icon: ShieldCheck, count: '24 Models', img: 'https://images.unsplash.com/photo-1563770660941-20978e870e9b?auto=format&fit=crop&q=80&w=600', link: '/firewalls' },
+              { title: 'CCTV', icon: Camera, count: '18 Models', img: 'https://images.unsplash.com/photo-1557862921-37829c790f19?auto=format&fit=crop&q=80&w=600', link: '/cctv' },
+              { title: 'Access Control', icon: Lock, count: '12 Models', img: 'https://images.unsplash.com/photo-1524338198850-8a2ff63a6104?auto=format&fit=crop&q=80&w=600', link: '/access-control' },
+              { title: 'Printers', icon: Printer, count: '28 Models', img: 'https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&q=80&w=600', link: '/printers' },
+              { title: 'Consumables', icon: Package, count: '150+ Items', img: 'https://images.unsplash.com/photo-1589492477829-5e65395b66cc?auto=format&fit=crop&q=80&w=600', link: '/consumables' },
+              { title: 'Accessories', icon: MousePointer2, count: '94 Items', img: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&q=80&w=600', link: '/accessories' },
             ].map((cat, i) => (
               <Link 
                 key={i} 
@@ -187,7 +192,7 @@ export default function Home() {
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <Link 
-                  to="/corporate" 
+                  to="/b2b-solutions" 
                   className="rounded-full bg-white px-8 py-4 text-center font-bold text-brand-secondary transition-transform hover:scale-105 shadow-xl"
                 >
                   Apply for Business Account
