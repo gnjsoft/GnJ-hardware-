@@ -58,7 +58,7 @@ export default function Header() {
                 {cat.sub.map((item) => (
                   <Link
                     key={item}
-                    to={`/category/${item.toLowerCase()}`}
+                    to={item === 'Desktops' ? '/desktops' : item === 'Workstations' ? '/workstations' : item === 'Servers' ? '/servers' : item === 'Networking' ? '/networking' : item === 'Storage' ? '/storage' : item === 'Laptops' ? '/laptops' : item === 'Firewalls' ? '/firewalls' : `/category/${item.toLowerCase()}`}
                     className="block rounded-md px-3 py-2 text-sm transition-colors hover:bg-slate-50 hover:text-brand-secondary"
                   >
                     {item}
@@ -119,7 +119,7 @@ export default function Header() {
                   {cat.sub.map((item) => (
                     <Link
                       key={item}
-                      to={`/category/${item.toLowerCase()}`}
+                      to={item === 'Desktops' ? '/desktops' : item === 'Workstations' ? '/workstations' : item === 'Servers' ? '/servers' : item === 'Networking' ? '/networking' : item === 'Storage' ? '/storage' : item === 'Laptops' ? '/laptops' : item === 'Firewalls' ? '/firewalls' : `/category/${item.toLowerCase()}`}
                       className="text-sm text-slate-600 hover:text-brand-secondary"
                     >
                       {item}

@@ -8,6 +8,13 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Catalog from './pages/Catalog';
+import Desktops from './pages/Desktops';
+import Workstations from './pages/Workstations';
+import Servers from './pages/Servers';
+import Networking from './pages/Networking';
+import Storage from './pages/Storage';
+import Laptops from './pages/Laptops';
+import Firewalls from './pages/Firewalls';
 import Account from './pages/Account';
 import FirebaseStatusBanner from './components/FirebaseStatusBanner';
 
@@ -33,6 +40,13 @@ export default function App() {
           <main className="flex-grow">
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/desktops" element={<Desktops />} />
+              <Route path="/workstations" element={<Workstations />} />
+              <Route path="/servers" element={<Servers />} />
+              <Route path="/networking" element={<Networking />} />
+              <Route path="/storage" element={<Storage />} />
+              <Route path="/laptops" element={<Laptops />} />
+              <Route path="/firewalls" element={<Firewalls />} />
               <Route path="/catalog" element={<Catalog />} />
               <Route path="/category/:id" element={<Catalog />} />
               <Route path="/product/:id" element={<Placeholder name="Product" />} />

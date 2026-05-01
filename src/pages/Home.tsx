@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Cpu, Server, Shield, Laptop, Monitor, Zap } from 'lucide-react';
+import { ArrowRight, Cpu, Server, ShieldCheck, Laptop, Monitor, Zap, Database } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { formatINR } from '../lib/utils';
 
@@ -105,7 +105,7 @@ export default function Home() {
               <div className="absolute -right-6 bottom-1/4 z-20 rounded-2xl border border-white/10 bg-white p-4 shadow-2xl backdrop-blur-xl transition-transform hover:-translate-y-1">
                 <div className="flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-secondary text-white">
-                    <Shield className="h-6 w-6" />
+                    <ShieldCheck className="h-6 w-6" />
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Security</p>
@@ -123,7 +123,7 @@ export default function Home() {
             <div className="flex justify-around gap-12 whitespace-nowrap px-4 font-mono text-[10px] tracking-widest text-slate-400 uppercase">
               <div className="flex items-center gap-2"><Cpu className="h-3 w-3" /> Intel vPro Compatible</div>
               <div className="flex items-center gap-2"><Server className="h-3 w-3" /> ECC Memory Support</div>
-              <div className="flex items-center gap-2"><Shield className="h-3 w-3" /> TAA Compliant Options</div>
+              <div className="flex items-center gap-2"><ShieldCheck className="h-3 w-3" /> TAA Compliant Options</div>
               <div className="flex items-center gap-2"><Zap className="h-3 w-3" /> India Registered (GST)</div>
             </div>
           </div>
@@ -141,16 +141,19 @@ export default function Home() {
             <Link to="/catalog" className="text-sm font-bold text-brand-secondary hover:underline">View All Categories</Link>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
             {[
-              { title: 'Workstations', icon: Monitor, count: '42 Models', img: 'https://images.unsplash.com/photo-1547082299-de196ea013d6?auto=format&fit=crop&q=80&w=600' },
-              { title: 'Laptops', icon: Laptop, count: '128 Models', img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=600' },
-              { title: 'Servers', icon: Server, count: '31 Models', img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc4b?auto=format&fit=crop&q=80&w=600' },
-              { title: 'Networking', icon: Zap, count: '89 Models', img: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=600' },
+              { title: 'Desktops', icon: Monitor, count: '64 Models', img: 'https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&q=80&w=600', link: '/desktops' },
+              { title: 'Workstations', icon: Cpu, count: '42 Models', img: 'https://images.unsplash.com/photo-1547082299-de196ea013d6?auto=format&fit=crop&q=80&w=600', link: '/workstations' },
+              { title: 'Laptops', icon: Laptop, count: '128 Models', img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=600', link: '/laptops' },
+              { title: 'Servers', icon: Server, count: '31 Models', img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc4b?auto=format&fit=crop&q=80&w=600', link: '/servers' },
+              { title: 'Storage', icon: Database, count: '15 Models', img: 'https://images.unsplash.com/photo-1597733336794-12d05021d510?auto=format&fit=crop&q=80&w=600', link: '/storage' },
+              { title: 'Networking', icon: Zap, count: '89 Models', img: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=600', link: '/networking' },
+              { title: 'Firewalls', icon: ShieldCheck, count: '24 Models', img: 'https://images.unsplash.com/photo-1563770660941-20978e870e9b?auto=format&fit=crop&q=80&w=600', link: '/firewalls' },
             ].map((cat, i) => (
               <Link 
                 key={i} 
-                to={`/category/${cat.title.toLowerCase()}`}
+                to={cat.link}
                 className="group relative h-80 overflow-hidden rounded-2xl border border-slate-200 bg-white transition-transform hover:-translate-y-1 shadow-sm hover:shadow-xl"
               >
                 <img 
